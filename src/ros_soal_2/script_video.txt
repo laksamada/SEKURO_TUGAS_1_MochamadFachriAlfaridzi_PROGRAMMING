@@ -1,0 +1,31 @@
+Halo, di video ini saya akan menjelaskan workspace ROS2 yang saya buat.
+
+Workspace saya ada di folder `src/ros_soal_1/ros2_ws`.
+Di dalam folder `src` ada package bernama `simple_chat`.
+Package ini memakai `ament_python`.
+
+Di package ini ada dua node.
+Node pertama adalah publisher dengan nama `talker_node`.
+Node kedua adalah subscriber dengan nama `listener_node`.
+
+Publisher mengirim pesan ke topic `chat_topic` setiap 1 detik.
+Pesan yang dikirim bertipe `std_msgs/msg/String`.
+Contoh isi pesannya adalah `Halo dari publisher, pesan ke-1`, lalu terus bertambah.
+
+Subscriber menerima pesan dari topic `chat_topic`.
+Saat pesan diterima, subscriber akan menampilkan isi pesan ke terminal.
+
+Proses build dimulai dengan masuk ke folder workspace, lalu menjalankan `colcon build`.
+Setelah build selesai, saya menjalankan `source install/setup.bash`.
+Lalu saya buka dua terminal.
+Di terminal pertama saya jalankan `ros2 run simple_chat talker`.
+Di terminal kedua saya jalankan `ros2 run simple_chat listener`.
+
+Kalau saya cek `ros2 node list`, akan terlihat node `/talker_node` dan `/listener_node`.
+Kalau saya cek `ros2 topic list`, akan ada topic `/chat_topic`.
+Kalau saya jalankan `ros2 topic echo /chat_topic`, isi pesan dari publisher bisa langsung terlihat.
+
+Jadi alurnya sederhana:
+publisher mengirim data ke topic, lalu subscriber membaca data dari topic itu.
+
+Sekian penjelasan dari saya.
