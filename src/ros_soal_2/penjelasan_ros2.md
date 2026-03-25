@@ -2,7 +2,7 @@
 
 ## Struktur workspace
 
-Workspace yang dibuat ada di `ros_soal_1/ros2_ws` dengan isi utama:
+Workspace yang dibuat ada di folder `src/ros_soal_1/ros2_ws` dengan isi utama:
 
 - `src/simple_chat/package.xml`
 - `src/simple_chat/setup.py`
@@ -21,16 +21,22 @@ Package yang dipakai bernama `simple_chat` dan memakai `ament_python`.
 cd src/ros_soal_1/ros2_ws
 ```
 
-2. Build package:
+2. Aktifkan environment ROS2:
+
+```bash
+micromamba activate ros_env
+```
+
+3. Build package:
 
 ```bash
 colcon build
 ```
 
-3. Source hasil build:
+4. Source hasil build:
 
 ```bash
-source install/setup.bash
+source install/local_setup.bash
 ```
 
 ## Cara menjalankan
@@ -41,16 +47,18 @@ Terminal 1:
 
 ```bash
 cd src/ros_soal_1/ros2_ws
-source install/setup.bash
-ros2 run simple_chat talker
+micromamba activate ros_env
+source install/local_setup.bash
+ros2 run simple_chat listener
 ```
 
 Terminal 2:
 
 ```bash
 cd src/ros_soal_1/ros2_ws
-source install/setup.bash
-ros2 run simple_chat listener
+micromamba activate ros_env
+source install/local_setup.bash
+ros2 run simple_chat talker
 ```
 
 ## Cara kerja program
@@ -112,4 +120,4 @@ ros2 topic echo /chat_topic
 
 ## Alur singkat
 
-Build package dengan `colcon build`, source workspace, jalankan publisher dan subscriber, lalu publisher mengirim pesan ke topic `chat_topic` dan subscriber membaca pesan itu secara realtime.
+Masuk ke workspace, aktifkan environment ROS2, jalankan `colcon build`, lalu `source install/local_setup.bash`. Setelah itu node `talker_node` mengirim pesan ke topic `chat_topic` dan node `listener_node` membaca pesan tersebut secara realtime.
